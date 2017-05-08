@@ -1,0 +1,28 @@
+.container {
+    position: relative;
+}
+
+.hidden_image, .container ,.hiding_wall{
+    width: 500px;
+    height: 500px;
+}
+
+.hidden_image img, .hiding_wall table{
+    width: inherit;
+    height: inherit;
+}
+
+.hidden_image, .hiding_wall {
+    position:absolute;
+}
+
+.hiding_wall tr, .hiding_wall td{
+    height: auto;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+.hiding_wall td{
+    background: yellow;
+}
