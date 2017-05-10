@@ -5,46 +5,55 @@
     <title>Magic Card</title>
 </head>
 <body>
-<table id="tableau" width="300px" height="600px" >
-    <tr>
-        <td > </td>
-        <td> </td>
-        <td> </td>
+    <div id="div_answer">
 
-    </tr>
-    <tr>
-        <td> </td>
-        <td> </td>
-        <td> </td>
+        <input type="text" name="inp_answer" width="50px"/>
+        <button id="answer" style="background-color: yellow">ANSWER</button>
+    </div>
+    <div id="div_reset">
 
-    </tr>
-    <tr>
-        <td> </td>
-        <td> </td>
-        <td> </td>
+        <button id="new_game" style="background-color: yellow">NEW GAME</button>
+        <button id="quit" style="background-color: yellow">QUIT GAME</button>
+    </div>
+    <table id="tableau" style="border: 3px solid yellow; margin: 1% 2% 3% 2%" >
+        <tr>
+                 <td > </td>
+                 <td> </td>
+                 <td> </td>
+                 <td> </td>
 
-    </tr>
-    <tr>
+       </tr>
+       <tr>
+                 <td> </td>
+                 <td> </td>
+                 <td> </td>
+                 <td> </td>
 
-        <td> </td>
-        <td> </td>
-        <td> </td>
-    </tr>
-    <tr>
-        <td> </td>
-        <td> </td>
-        <td> </td>
+       </tr>
+       <tr>
+                 <td> </td>
+                 <td> </td>
+                 <td> </td>
+                 <td> </td>
 
-    </tr>
-    <tr>
-        <td> </td>
-        <td> </td>
-        <td> </td>
+       </tr>
+       <tr>
 
-    </tr>
+                 <td> </td>
+                 <td> </td>
+                 <td> </td>
+                 <td> </td>
+       </tr>
 
-
-</table>
+    </table>
+    <div id="img_guess">
+        <label for="parties trouvees" >Paires trouvées</label>
+        <textarea id="parties trouvees"></textarea>
+        <label for="time" >Temps mis jeu</label>
+        <textarea id="time" ></textarea>
+        <label for="score" >Meilleur Score</label>
+        <textarea id="score"></textarea>
+    </div>
 <script src="static/js/main.js"></script>
 </body>
 </html>
