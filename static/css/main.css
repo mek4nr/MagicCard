@@ -1,0 +1,65 @@
+body{
+    background-image: url("../img/max.jpg");
+   background-position: center;
+    background-repeat: no-repeat;
+
+}
+#container_table_img{
+
+    display: flex;
+    justify-content: space-around;
+
+}
+
+#container_btn_answer{
+margin-bottom: 50px;
+    background: #f4c235;
+    border: 10px solid gray;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    font-family: "Segoe UI Semibold";
+    font-weight: bold;
+    color: #092f80;
+}
+
+.btn{
+    border-radius: 50px;
+    color: #092f80;
+    background-color:#f8dc3a;
+}
+
+#div_reset{
+    padding: 10px;
+}
+#img_guess{
+    font-size: large;
+
+}
+
+
+td{
+
+    width: 100px;
+    height: 110px;
+   /* display: inline-block;*/
+    background-image: url("../img/dos2.png");
+    background-position: center;
+    border: 5px solid blue;
+    background-repeat: no-repeat;
+
+
+}
+table{
+
+    border: 2px solid #1b6d85;
+
+   /* display: inline-block;*/
+
+}
+
+span{
+    background: green;
+    width: 300px;
+    display: block;
+}
