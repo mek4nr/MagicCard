@@ -28,7 +28,6 @@ function style_index(){
 
 
     var div_reset_style=document.getElementById('div_reset');
-    div_reset_style.style.margin='10px';
     var labs=document.getElementsByTagName('label');
     for (var i=0;i<labs.length;i++){
         labs[i].style.color='yellow';
