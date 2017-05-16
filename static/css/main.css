@@ -43,9 +43,7 @@ body{
 
 #img_guess span{
     width: 300px;
-    background: white;
     border-radius: 20px;
     color: blue;
-    display: block;
     text-align: center;
 }
