@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="static/css/imagebox.css" />
 </head>
 <body>
+  <audio src="static/sons/chris.wav" style="" id="hoverSound">
+
+  </audio>
   <div id="container_btn_answer">
 
 
@@ -21,15 +24,18 @@
               <button class="btn" id="quit">EXIT GAME</button>
           </div>
 
+
+          <button class="btn" id="menu">ACCEUIL</button>
+          <button class="btn" id="chrono">START</button>
           <input type="text" name="inp_answer" width="50px"/>
-          <button class="btn" id="answer" style="background-color: #f8dc3a">ANSWER</button>
+          <button class="btn" id="answer">ANSWER</button>
       </div>
 
       <div id="img_guess">
           <label>PAIRES TROUVEES:</label>
           <span>  </span>
           <label>TEMPS MIS JEU:</label>
-          <span>   </span>
+          <span id="sp_time">   </span>
           <label>MEILLEUR SCORE:</label>
           <span>   </span>
 
@@ -78,7 +84,7 @@
   <script src="static/js/jquery-3.2.1.min.js"></script>
   <script src="static/js/bootstrap.min.js"></script>
   <script src="static/js/magicCard.js"></script>
-<!--  <script src="static/js/main.js"></script>-->
+  <script src="static/js/main.js"></script>
   <script type="text/javascript">
 
   </script>
