@@ -3,75 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <title>Magic Card</title>
+    <link rel="stylesheet" href="static/css/imagebox.css" />
+    <link rel="stylesheet" href="static/css/cards.css" />
     <link rel="stylesheet" href="static/css/bootstrap.min.css" />
     <link rel="stylesheet" href="static/css/bootstrap-theme.min.css" />
     <link rel="stylesheet" href="static/css/main.css" />
-    <link rel="stylesheet" href="static/css/imagebox.css" />
+
 </head>
 <body>
-  <div id="container_btn_answer">
+    <div class="container-fluid" id="container_btn_answer">
+        <div id="div_answer">
+            <div id="div_reset">
+                <button class="btn" id="new_game">NEW GAME</button>
+                <select class="btn">
+                    <option>POKEMON</option>
+                    <option>AVION DE CHASSE</option>
+                </select>
+                <button class="btn" id="quit">EXIT GAME</button>
+            </div>
 
-      <div id="img_guess">
-          <label for="parties trouvees" >Paires trouvées</label>
-          <textarea id="parties trouvees"></textarea>
-          <label for="time" >Temps mis jeu</label>
-          <textarea id="time" ></textarea>
-          <label for="score" >Meilleur Score</label>
-          <textarea id="score"></textarea>
+            <input type="text" name="inp_answer" width="50px"/>
+            <button class="btn" id="answer" style="background-color: #f8dc3a">ANSWER</button>
+        </div>
 
-      </div>
-
-      <div id="div_answer">
-
-          <div id="div_reset">
-
-              <button id="new_game" style="background-color: yellow">NEW GAME</button>
-              <button id="quit" style="background-color: yellow">QUIT GAME</button>
-          </div>
-
-          <input type="text" name="inp_answer" width="50px"/>
-          <button id="answer" style="background-color: yellow">ANSWER</button>
-      </div>
-
-  </div>
+        <div id="img_guess">
+            <span>PAIRES TROUVEES:</span>
+            <span id="pair_found">  </span>
+            <span>TEMPS MIS JEU:</span>
+            <span id="current_time">   </span>
+            <span>SCORE:</span>
+            <span id="score">   </span>
+        </div>
+    </div>
 
   <div id="container_table_img">
 
+      <div class="container_picture">
+          <div class="hidden_image">
+              <img src="static/img/absol.jpg" />
+          </div>
+          <div class="hiding_wall">
+          </div>
+      </div>
 
-      <table id="tableau" style="border: 3px solid yellow; " >
-          <tr>
-              <td > </td>
-              <td> </td>
-              <td> </td>
-              <td> </td>
-
-          </tr>
-          <tr>
-              <td> </td>
-              <td> </td>
-              <td> </td>
-              <td> </td>
-
-          </tr>
-          <tr>
-              <td> </td>
-              <td> </td>
-              <td> </td>
-              <td> </td>
-
-          </tr>
-          <tr>
-
-              <td> </td>
-              <td> </td>
-              <td> </td>
-              <td> </td>
-          </tr>
+      <table id="card_board"  >
 
       </table>
-
-      <div id="container_picture"><img src="static/img/absol1.png" alt="image" id="myPicture"></div>
-
   </div>
 
   <script src="static/js/jquery-3.2.1.min.js"></script>
