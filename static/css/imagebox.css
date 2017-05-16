@@ -1,10 +1,10 @@
-.container {
+.image_container {
     position: relative;
 }
 
 .hidden_image, .container ,.hiding_wall{
-    width: 500px;
-    height: 500px;
+    width: 400px;
+    height: 400px;
 }
 
 .hidden_image img, .hiding_wall table{
@@ -23,6 +23,11 @@
     padding: 0;
     border: none;
 }
-.hiding_wall td{
+.hidden_block{
     background: yellow;
 }
+
+.show_block{
+    background: none;
+}
+
