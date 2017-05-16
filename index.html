@@ -9,36 +9,46 @@
     <link rel="stylesheet" href="static/css/imagebox.css" />
 </head>
 <body>
+  <audio src="static/sons/chris.wav" style="" id="hoverSound">
+
+  </audio>
   <div id="container_btn_answer">
 
-      <div id="img_guess">
-          <label for="parties trouvees" >Paires trouvées</label>
-          <textarea id="parties trouvees"></textarea>
-          <label for="time" >Temps mis jeu</label>
-          <textarea id="time" ></textarea>
-          <label for="score" >Meilleur Score</label>
-          <textarea id="score"></textarea>
-
-      </div>
 
       <div id="div_answer">
 
           <div id="div_reset">
 
-              <button id="new_game" style="background-color: yellow">NEW GAME</button>
-              <button id="quit" style="background-color: yellow">QUIT GAME</button>
+              <button class="btn" id="new_game">NEW GAME</button>
+              <select class="btn"><option>POKEMON</option> <option>AVION DE CHASSE</option></select>
+              <button class="btn" id="quit">EXIT GAME</button>
           </div>
 
+
+          <button class="btn" id="menu">ACCEUIL</button>
+          <button class="btn" id="chrono">START</button>
           <input type="text" name="inp_answer" width="50px"/>
-          <button id="answer" style="background-color: yellow">ANSWER</button>
+          <button class="btn" id="answer">ANSWER</button>
       </div>
+
+      <div id="img_guess">
+          <label>PAIRES TROUVEES:</label>
+          <span>  </span>
+          <label>TEMPS MIS JEU:</label>
+          <span id="sp_time">   </span>
+          <label>MEILLEUR SCORE:</label>
+          <span>   </span>
+
+      </div>
+
+
 
   </div>
 
   <div id="container_table_img">
 
 
-      <table id="tableau" style="border: 3px solid yellow; " >
+      <table id="tableau"  >
           <tr>
               <td > </td>
               <td> </td>
@@ -69,11 +79,8 @@
           </tr>
 
       </table>
-
       <div id="container_picture"><img src="static/img/absol1.png" alt="image" id="myPicture"></div>
-
   </div>
-
   <script src="static/js/jquery-3.2.1.min.js"></script>
   <script src="static/js/bootstrap.min.js"></script>
   <script src="static/js/magicCard.js"></script>

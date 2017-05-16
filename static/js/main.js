@@ -4,74 +4,33 @@
 
 "use strict";
 
-document.body.style.backgroundImage="url(static/img/pik3.png)";
-document.body.style.backgroundSize='cover';
-document.body.style.backgroundRepeat="no-repeat";
-document.getElementById('tableau').style.display='inline-block';
+var centi=0 ;
+var secon=0 ;
+var minu=0;
 
-var div_answer_style=document.getElementById('div_answer');
-div_answer_style.style.width='300px';
-
-var div_reset_style=document.getElementById('div_reset');
-var labs=document.getElementsByTagName('label');
-for (var i=0;i<labs.length;i++){
-  labs[i].style.color='yellow';
+function chrono(){
+    centi++; //incrémentation des dixièmes de 1
+    if (centi>9){centi=0;secon++} //si les dixièmes > 9,on les réinitialise à 0 et on incrémente les secondes de 1
+    if (secon>59){secon=0;minu++} //si les secondes > 59,on les réinitialise à 0 et on incrémente les minutes de 1
+    document.getElementById('sp_time').textContent= minu + ":" + secon +":"+ centi;
+     var compte=setTimeout('chrono()',100) ;//la fonction est relancée tous les 10° de secondes
 }
 
 
-table_style();
-guess_img_style();
-my_picture_style();
+document.getElementById('chrono').addEventListener('click', function () {
+  //  console.log(this);
+    chrono();
+    menuHover();
+})
 
-function my_picture_style(){
-    var container_picture=document.getElementById('container_picture');
-    container_picture.style.display='inline-block';
-
-  //  container_picture.style.border="2px solid red";
-    container_picture.style.margin="0px 0px 0px 550px";
-
-
+function rasee(){ //fonction qui remet les compteurs à 0
+    clearTimeout(compte); //arrête la fonction chrono()
+    centi=0;
+    secon=0;
+    minu=0;
 }
 
-
-function guess_img_style(){
-
-  var div_img=document.getElementById('img_guess');
-  var div_answer=document.getElementById('div_answer');
-
-    div_answer.style.display="inline-block";
-    div_answer.style.marginLeft="550px";
-    div_answer.style.border="3px solid yellow";
-
-  div_img.style.border="3px solid yellow";
-  div_img.style.width="300px";
-  div_img.style.backgroundColor='black';
-  div_img.style.display='inline-block';
-   div_img.style.marginLeft='50px';
+function menuHover() {
+    document.getElementById('hoverSound').play();
 }
-
-function table_style() {
-
-var my_td=document.getElementsByTagName('td');
-
-for(var i=0; i<my_td.length;i++){
-
-    my_td[i].style.width="100px";
-    my_td[i].style.height="120px";
-  //  my_td[i].style.marginRight="auto";
-  //  my_td[i].style.marginLeft="auto";
-    my_td[i].style.border="1px solid black";
-    my_td[i].style.backgroundImage="url(static/img/dos.png)";
-    my_td[i].style.backgroundPosition="center";
-    my_td[i].style.backgroundColor="yellow";
-    my_td[i].style.backgroundRepeat="no-repeat";
-
-
-
-}
-
-
-
-}
-
 
