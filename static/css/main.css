@@ -1,5 +1,5 @@
 body{
-    background: url("../img/max.jpg") center center no-repeat;
+    background: url("../img/max.jpg") center center no-repeat #0000cc;
     background-size: cover;
 }
 
@@ -15,7 +15,6 @@ body{
     display: flex;
     justify-content: space-around;
     padding: 10px;
-    font-family: "Segoe UI Semibold", "Arial";
     font-weight: bold;
     color: #092f80;
 }
@@ -27,11 +26,10 @@ body{
 }
 
 #div_reset{
-    padding: 10px;
+    padding: 5px;
 }
 #img_guess{
     font-size: large;
-
 }
 
 #card_board td{
@@ -45,5 +43,9 @@ body{
 
 #img_guess span{
     width: 300px;
+    background: white;
+    border-radius: 20px;
+    color: blue;
     display: block;
+    text-align: center;
 }

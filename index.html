@@ -11,52 +11,56 @@
 
 </head>
 <body>
-    <div class="container-fluid" id="container_btn_answer">
-        <div id="div_answer">
-            <div id="div_reset">
-                <button class="btn" id="new_game">NEW GAME</button>
-                <select class="btn">
-                    <option>POKEMON</option>
-                    <option>AVION DE CHASSE</option>
-                </select>
-                <button class="btn" id="quit">EXIT GAME</button>
-            </div>
-
-            <input type="text" name="inp_answer" width="50px"/>
-            <button class="btn" id="answer" style="background-color: #f8dc3a">ANSWER</button>
+<div class="container-fluid" id="container_btn_answer">
+    <div id="div_answer">
+        <div id="div_reset">
+            <button class="btn" id="new_game">NEW GAME</button>
+            <select class="btn">
+                <option>POKEMON</option>
+                <option>AVION DE CHASSE</option>
+            </select>
+            <button class="btn" id="quit">EXIT GAME</button>
         </div>
+        <button class="btn" id="menu">ACCEUIL</button>
+        <button class="btn" id="chrono">START</button>
+        <input type="text" name="inp_answer" width="50px"/>
+        <button class="btn" id="answer">ANSWER</button>
+    </div>
 
-        <div id="img_guess">
-            <span>PAIRES TROUVEES:</span>
-            <span id="pair_found">  </span>
-            <span>TEMPS MIS JEU:</span>
-            <span id="current_time">   </span>
-            <span>SCORE:</span>
-            <span id="score">   </span>
+    <div id="img_guess">
+        <span>PAIRES TROUVEES:</span>
+        <span id="pair_found">  </span>
+        <span>TEMPS MIS JEU:</span>
+        <span id="current_time">   </span>
+        <span>SCORE:</span>
+        <span id="score">   </span>
+    </div>
+</div>
+<audio src="static/sons/chris.wav" style="" id="hoverSound"></audio>
+
+<div id="container_table_img">
+    <table id="card_board"  >
+
+    </table>
+    <div class="container_picture">
+        <div class="hidden_image">
+            <img src="static/img/absol.jpg" />
+        </div>
+        <div class="hiding_wall">
         </div>
     </div>
 
-  <div id="container_table_img">
 
-      <div class="container_picture">
-          <div class="hidden_image">
-              <img src="static/img/absol.jpg" />
-          </div>
-          <div class="hiding_wall">
-          </div>
-      </div>
+</div>
 
-      <table id="card_board"  >
 
-      </table>
-  </div>
 
-  <script src="static/js/jquery-3.2.1.min.js"></script>
-  <script src="static/js/bootstrap.min.js"></script>
-  <script src="static/js/magicCard.js"></script>
-  <script src="static/js/main.js"></script>
-  <script type="text/javascript">
+<script src="static/js/jquery-3.2.1.min.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
+<script src="static/js/magicCard.js"></script>
+<script src="static/js/main.js"></script>
+<script type="text/javascript">
 
-  </script>
+</script>
 </body>
 </html>
