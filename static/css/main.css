@@ -1,35 +1,60 @@
+html{
+    width: 100%;
+    height: 100%;
+}
+
 body{
-    background: url("../img/max.jpg") center center no-repeat #0000cc;
+    width: 100%;
+    height: 80%;
+    background-image: url("../img/max.jpg");
     background-size: cover;
 }
 
 #container_table_img{
-    display: flex;
-    justify-content: space-around;
+    width: 70%;
+   display: flex;
+   justify-content: space-around;
+
 }
 
+
 #container_btn_answer{
-    margin-bottom: 50px;
+    width: 98%;
+    margin-bottom: 5%;
     background: #f4c235;
     border: 10px solid gray;
     display: flex;
     justify-content: space-around;
-    padding: 10px;
+     padding-top: 2%;
     font-weight: bold;
     color: #092f80;
+    border-radius: 20%;
+   padding-bottom: 4px;
 }
 
 .btn{
     border-radius: 50px;
-    color: #092f80;
+    color: steelblue;
+    font-weight: bold;
     background-color:#f8dc3a;
+}
+.btn:hover{
+    background-color:gray;
+    color:  #f4c235;
+}
+.btn:active{
+    background-color: red;
+    box-shadow: 0 5px #666;
+    transform: translateY(10px);
 }
 
 #div_reset{
-    padding: 5px;
+    /*padding: 5px;*/
 }
-#img_guess{
+#img_guess > div{
     font-size: large;
+    color: steelblue;
+
 }
 
 #card_board td{
@@ -43,7 +68,6 @@ body{
 
 #img_guess span{
     width: 300px;
-    border-radius: 20px;
-    color: blue;
+    color: white;
     text-align: center;
 }
