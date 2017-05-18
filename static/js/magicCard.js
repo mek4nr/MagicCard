@@ -72,7 +72,7 @@
         }
         $cards.not("." + flipClass + ", ." + foundClass).click(flip);
     }
-
+//fonction que je dois modifier
     function checkPair(){
 
         let rnd = Math.random()*100;
