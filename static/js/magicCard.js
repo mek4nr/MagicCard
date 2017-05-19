@@ -96,6 +96,7 @@
      * @param e event
      */
     function transitionListener(e){
+        console.log("transitionListener");
         if(!$(this).hasClass(flipClass) && !$(this).hasClass(foundClass)){
             $(this).find(".back").find("img").each(function () {
                 $(this).attr("src", "");
@@ -119,10 +120,18 @@
      * @returns {boolean} vrai si c'est une pair, faux sinon
      */
     function checkPair(){
-
+        let found= false;
+        let cardFlipped= $('.'+ flipClass);
+        let index1 = parseInt($(cardFlipped[0]).attr(attrCardId));
+        let index2=parseInt($(cardFlipped[1]).attr(attrCardId));
+        if(cards[index1].id==cards[index2].id){
+            found= true;
+            pairFound++;
+        }
+        tried++;
         generateScore();
         generateFoundPair();
-        return rnd > 50;
+        return found;
     }
 
     /***
@@ -151,6 +160,7 @@
      * Fait tourner une carte et affiche la source de l'image juste avant
      */
     function flip(){
+        console.log("flip");
         $cards.unbind("click");
         if(!$(this).hasClass(flipClass)) {
             $(this).find(".back").css("background-image", "url('" + cards[parseInt($(this).attr(attrCardId))].src + "')");
@@ -213,8 +223,6 @@
         let score = (foundPoints * pairFound + triedPoints * (tried-pairFound));
         let text = " point";
         text += (score > 1)? "s":"";
-
-        console.log(scoreZone);
 
         $(scoreZone).each(function(){
             $(this).text(score + text);
