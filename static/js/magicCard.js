@@ -1,18 +1,46 @@
 (function($)
 {
+    // Css Class lorsque la carte flip
     const flipClass = "flipped";
+
+    // Css Class lorsque la pair est trouvée
     const foundClass = "find";
+
+    // Point lorsque trouvé ou essayé
+    const foundPoints = 100;
+    const triedPoints = -10;
+
+    // La liste des cartes présentent
     let cards = [];
+
+    // Nombre de paire trouvée
     let pairFound = 0;
+
+    // Nombre d'essaie
     let tried = 0;
+
+    // Liste des cartes en objet jquery
     let $cards;
+
+    // Nombre de lignes de cartes
     let rowCards = 0;
+
+    // Nombre de colonnes de cartes
     let colCards = 0;
-    let foundPoints = 100;
-    let triedPoints = -10;
+
+    // Zone de score
     let scoreZone = null;
+
+    // Zone du nombre de pair trouvée
     let foundPairZone = null;
 
+
+    /***
+     * Fonction jquery qui va créer un tableau html depuis un selecteur jquery
+     * pour afficher un tableau de carte flippable
+     * @param row : nombre de ligne
+     * @param col : nombre de colonnes
+     */
     $.fn.magicCard = function(row, col){
         rowCards = row;
         colCards = col;
@@ -32,6 +60,11 @@
         $cards.click(flip).on("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", transitionListener);
     };
 
+    /***
+     * Genere les cards dans le tableaux
+     * @param mode le mode de jeu
+     * @param level le niveau (pour changer l'image a deviner)
+     */
     function generateCards(mode, level){
         for(let i=0; i<rowCards*colCards/2; i++){
             cards.push({
@@ -55,6 +88,11 @@
         cards = rndCards
     }
 
+    /***
+     * Listener de ce qu'il se passe lorsqu'une carte flip, permet de supprimer le SRC
+     * de la dite image pour eviter l'inspection de code.
+     * @param e event
+     */
     function transitionListener(e){
         if(!$(this).hasClass(flipClass) && !$(this).hasClass(foundClass)){
             $(this).find(".back").find("img").each(function () {
@@ -73,6 +111,11 @@
         $cards.not("." + flipClass + ", ." + foundClass).click(flip);
     }
 //fonction que je dois modifier
+
+    /***
+     * Fonction qui va tester si les 2 cartes ouvertent sont une pair ou non
+     * @returns {boolean} vrai si c'est une pair, faux sinon
+     */
     function checkPair(){
 
         let rnd = Math.random()*100;
@@ -86,11 +129,19 @@
         return rnd > 50;
     }
 
+    /***
+     * Affiche de maniere aléatoire un bout de l'image a deviner
+     */
     function showPartHiddenImage(){
         let $blocks = $(".hidden_block");
         $($blocks[parseInt(Math.random()*$blocks.length)]).removeClass("hidden_block").addClass("show_block");
     }
 
+    /***
+     * Créer une carte HTML flippable
+     * @param index l'index de la carte dans le tableau (de 0 a row*col)
+     * @returns {Element} retourne la carte en objet jquery
+     */
     function createCard(index){
         let container = document.createElement("div");
         $(container).addClass("card_container");
@@ -100,6 +151,9 @@
         return container;
     }
 
+    /***
+     * Fait tourner une carte et affiche la source de l'image juste avant
+     */
     function flip(){
         $cards.unbind("click");
         if(!$(this).hasClass(flipClass)) {
@@ -108,6 +162,11 @@
         $(this).toggleClass(flipClass);
     }
 
+    /***
+     * Fonction jquery pour generer un tableau de case sur un element (ici notre image de guessing)
+     * @param row
+     * @param col
+     */
     $.fn.generateHiding = function(row, col)
     {
         this.each(function()
@@ -139,6 +198,9 @@
         generateFoundPair();
     };
 
+    /***
+     * update la vue pour afficher le nombre de paire trouvée
+     */
     function generateFoundPair(){
         let text = " paire";
         text += (pairFound > 1)? "s":"";
@@ -148,6 +210,9 @@
         });
     }
 
+    /***
+     * update la vue pour afficher le score en cours
+     */
     function generateScore(){
         let score = (foundPoints * pairFound + triedPoints * (tried-pairFound));
         let text = " point";
