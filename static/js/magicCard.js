@@ -112,21 +112,18 @@
     }
 //fonction que je dois modifier
 
-    /***
-     * Fonction qui va tester si les 2 cartes ouvertent sont une pair ou non
-     * @returns {boolean} vrai si c'est une pair, faux sinon
-     */
-    function checkPair(){
-
-        let rnd = Math.random()*100;
-        if(rnd > 50){
-            pairFound++;
-
-        }
+    
+    // Regarde JB si c'est pas bon je recommence...
+    function checkPair(c){
+        var found= 'false';
+            if($(this).hasClass(flipClass).attr('id').val()==c.attr('id').val()){
+                found= 'true';
+                c.addClass(foundClass);
+            }
         tried++;
         generateScore();
         generateFoundPair();
-        return rnd > 50;
+        return found;
     }
 
     /***
