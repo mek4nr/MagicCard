@@ -3,6 +3,8 @@
     // Css Class lorsque la carte flip
     const flipClass = "flipped";
 
+    const attrCardId = "data-card-id";
+
     // Css Class lorsque la pair est trouvée
     const foundClass = "find";
 
@@ -118,12 +120,6 @@
      */
     function checkPair(){
 
-        let rnd = Math.random()*100;
-        if(rnd > 50){
-            pairFound++;
-
-        }
-        tried++;
         generateScore();
         generateFoundPair();
         return rnd > 50;
@@ -145,9 +141,9 @@
     function createCard(index){
         let container = document.createElement("div");
         $(container).addClass("card_container");
-        let card = $("<div>").appendTo(container).addClass("card").attr("card-id", index);
+        let card = $("<div>").appendTo(container).addClass("card").attr(attrCardId, index);
         $("<div>").appendTo(card).addClass("front").css('background-image', "url('static/img/dos2.png')");
-        $("<div>").appendTo(card).addClass("back")
+        $("<div>").appendTo(card).addClass("back");
         return container;
     }
 
@@ -157,7 +153,7 @@
     function flip(){
         $cards.unbind("click");
         if(!$(this).hasClass(flipClass)) {
-            $(this).find(".back").css("background-image", "url('" + cards[parseInt($(this).attr("card-id"))].src + "')");
+            $(this).find(".back").css("background-image", "url('" + cards[parseInt($(this).attr(attrCardId))].src + "')");
         }
         $(this).toggleClass(flipClass);
     }
@@ -179,7 +175,7 @@
             for(let i = 0; i < row; i++){
                 let tr = tbody.insertRow(i);
                 for(let j = 0; j < col; j++){
-                    let td = tr.insertCell(j)
+                    let td = tr.insertCell(j);
                     $(td).addClass("hidden_block");
                 }
             }
