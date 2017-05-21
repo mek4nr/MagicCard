@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Magic Card</title>
+    <link rel="stylesheet" href="static/css/imagebox.css" />
+    <link rel="stylesheet" href="static/css/cards.css" />
+    <!-- <link rel="stylesheet" href="static/css/bootstrap.min.css" />-->
+    <link rel="stylesheet" href="static/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="static/css/avions.css" />
+</head>
+<body>
+
+<audio src="static/sons/chris.wav" style="" id="hoverSound"></audio>
+
+<div id="container_table_img">
+
+    <table id="card_board"  >
+
+    </table>
+    <div class="container-fluid" id="container_btn_answer">
+        <div id="div_answer">
+            <select class="btn">
+                <option>POKEMON</option>
+                <option>AVION DE CHASSE</option>
+            </select>
+            <button class="btn" id="menu"><a href="index2.html">WELCOME</a></button>
+            <button class="btn" id="chrono">START GAME</button>
+
+
+        </div>
+        <div id="div_reset">
+
+            <div id="area_answer">
+                <button class="btn" id="answer">ANSWER</button>
+                <input type="text" name="inp_answer"/>
+            </div>
+
+
+        </div>
+        <div id="img_guess">
+            <div>PAIRES:<span id="pair_found">  </span></div>
+            <div>TEMPS MIS:<span id="current_time">   </span></div>
+            <div>SCORE:<span id="score">   </span></div>
+            <div id="div_btns">
+                <button class="btn" id="new_game">NEW GAME</button>
+                <button class="btn" id="quit">EXIT GAME</button>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="container_picture">
+        <div class="hidden_image">
+            <img src="static/img/absol.jpg" />
+        </div>
+        <div class="hiding_wall">
+        </div>
+    </div>
+</div>
+<script src="static/js/jquery-3.2.1.min.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
+<script src="static/js/magicCard.js"></script>
+<script src="static/js/main.js"></script>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

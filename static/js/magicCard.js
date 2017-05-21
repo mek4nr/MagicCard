@@ -113,7 +113,7 @@
         }
         $cards.not("." + flipClass + ", ." + foundClass).click(flip);
     }
-//fonction que je dois modifier
+
 
     /***
      * Fonction qui va tester si les 2 cartes ouvertent sont une pair ou non

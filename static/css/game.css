@@ -5,7 +5,7 @@ html{
 
 body{
     width: 90%;
-    height: 100%;
+    height: 90%;
     background-image: url("../img/fond2.jpg");
     background-position: center;
     background-repeat: repeat;
@@ -13,7 +13,7 @@ body{
     justify-content: center;*/
   margin-right: auto;
     margin-left: auto;
-    margin-top: 10%;
+
 
 
 }
@@ -24,36 +24,43 @@ body{
     background-position: center;
     background-repeat: no-repeat;
     width: 45%;
-    height: 60%;
+  /*  height: 60%;*/
    /* border-radius: 50px;*/
-    margin: auto;
+    margin-right: auto;
+    margin-left: auto;
+   margin-top: 10%;
     /*border: 3px solid gray;*/
     background-image:url("../img/magic.jpg");
 }
 h1{
 
-    color: #f8dc3a;
-    width: 70%;
+    color: green;
+    width: 80%;
     text-align: center;
     margin: auto;
-    margin-top: 10px;
+    letter-spacing: 10px;
+   /* margin-top: 10px;*/
     font-family: "MS UI Gothic";
     font-weight: bold;
-    background-color: gray;
-    letter-spacing: 2px;
+    background-image: url("../img/pink4.jpg");
+
     padding: 10px;
-    opacity: 0.6;
+   /* opacity: 0.4;*/
     border-radius: 60px;
 
 
 }
+
 .option{
-    font-weight: bold;
+
     border-radius: 30px;
-    color: #092f80;
-    background-color:#f8dc3a;
+    color: green;
+    background-image: url("../img/pink4.jpg");
     display: block;
     margin: auto;
     margin-top: 10px;
     padding: 20px;
+    font-weight: bold;
+    font-size: x-large;
+    text-align-last: center;
 }
