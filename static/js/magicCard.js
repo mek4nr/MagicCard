@@ -1,13 +1,6 @@
 (function($)
 {
-    // Css Class lorsque la carte flip
-    const flipClass = "flipped";
-
     const attrCardId = "data-card-id";
-
-    // Css Class lorsque la pair est trouvée
-    const foundClass = "find";
-
     // Point lorsque trouvé ou essayé
     const foundPoints = 100;
     const triedPoints = -10;
@@ -17,6 +10,8 @@
 
     // Nombre de paire trouvée
     let pairFound = 0;
+
+    let flipped = 0;
 
     // Nombre d'essaie
     let tried = 0;
@@ -30,25 +25,85 @@
     // Nombre de colonnes de cartes
     let colCards = 0;
 
-    // Zone de score
-    let scoreZone = null;
+    let centi=0 ;
+    let secon=0 ;
+    let minu=0;
+    let timer = null;
 
-    // Zone du nombre de pair trouvée
-    let foundPairZone = null;
+    let answer = {
+        'pokemon' : ['absol'],
+        'eevee' : ['']
+    };
 
+    let defaults = {
+        scoreZone : $("#score"),
+        pairFoundZone : $("#pair_found"),
+        cardsBoard : $("#card_board"),
+        hidingWall : $(".hiding_wall"),
+        hiddenImage : $(".hidden_image"),
+        startButton : $("#start"),
+        chronometer : $('#current_time'),
+        flipClass : "flipped",
+        foundClass : "find",
+        mode : "pokemon",
+        level : 1
+    };
+
+    init = function(options){
+        $.extend( true, defaults, options );
+        reset();
+    };
+
+    function reset(){
+        resetChronometer();
+        tried = 0;
+        pairFound = 0;
+        generateHiding(4, 2);
+        magicCard(4, 4);
+        generateScore();
+        generateFoundPair();
+        $(defaults.startButton).click(start);
+    }
+
+    change = function(mode, level){
+        $.extend( true, defaults, {mode: mode, level:level} );
+        reset();
+    };
+
+    function start(){
+        chronometer();
+        $cards.click(flip).on("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", transitionListener);
+        $(this).unbind("click");
+    }
+
+    function chronometer(){
+        centi++; //incrémentation des dixièmes de 1
+        if (centi>9){centi=0;secon++} //si les dixièmes > 9,on les réinitialise à 0 et on incrémente les secondes de 1
+        if (secon>59){secon=0;minu++} //si les secondes > 59,on les réinitialise à 0 et on incrémente les minutes de 1
+        defaults.chronometer.text(minu + ":" + secon +":"+ centi);
+        timer = setTimeout(chronometer,100) ;//la fonction est relancée tous les 10° de secondes
+    }
+
+    function resetChronometer(){ //fonction qui remet les compteurs à 0
+        clearTimeout(timer); //arrête la fonction chrono()
+        centi=0;
+        secon=0;
+        minu=0;
+        $('#current_time').text(minu + ":" + secon +":"+ centi);
+    }
 
     /***
-     * Fonction jquery qui va créer un tableau html depuis un selecteur jquery
+     * Fonction jquery qui va créer un tableau html
      * pour afficher un tableau de carte flippable
      * @param row : nombre de ligne
      * @param col : nombre de colonnes
      */
-    $.fn.magicCard = function(row, col){
+     function magicCard(row, col){
         rowCards = row;
         colCards = col;
 
         let tbody = document.createElement("tbody");
-        $(this).append(tbody);
+        $(defaults.cardsBoard).html("").append(tbody);
 
         for(let i = 0; i < row; i++){
             let tr = tbody.insertRow(i);
@@ -58,23 +113,23 @@
             }
         }
         $cards = $(".card");
-        generateCards("pokemon",1);
-        $cards.click(flip).on("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", transitionListener);
-    };
+        generateCards();
+    }
 
     /***
      * Genere les cards dans le tableaux
      * @param mode le mode de jeu
      * @param level le niveau (pour changer l'image a deviner)
      */
-    function generateCards(mode, level){
+    function generateCards(){
+        cards = [];
         for(let i=0; i<rowCards*colCards/2; i++){
             cards.push({
-                "src": "static/img/cards/" + mode + "/img" + (i+1) + ".png",
+                "src": getImageCardPath(i),
                 "id" : i
             });
             cards.push({
-                "src": "static/img/cards/" + mode + "/img" + (i+1) + ".png",
+                "src": getImageCardPath(i),
                 "id" : i
             });
         }
@@ -82,12 +137,20 @@
         let rndCards = [];
 
         for(let i=0; i<rowCards*colCards; i++){
-            let rnd = parseInt(Math.random()*cards.length)
+            let rnd = parseInt(Math.random()*cards.length);
             rndCards[i] = cards[rnd];
             cards.splice(rnd,1);
         }
 
         cards = rndCards
+    }
+
+    function getImageCardPath(index){
+        return "static/img/mode/" + defaults.mode + "/cards/img" + (index+1) + ".png";
+    }
+
+    function getImageLevelPath(){
+        return "static/img/mode/" + defaults.mode + "/levels/img" + defaults.level + ".png";
     }
 
     /***
@@ -97,34 +160,39 @@
      */
     function transitionListener(e){
         console.log("transitionListener");
-        if(!$(this).hasClass(flipClass) && !$(this).hasClass(foundClass)){
+
+        if(!$(this).hasClass(defaults.flipClass) && !$(this).hasClass(defaults.foundClass)){
             $(this).find(".back").find("img").each(function () {
                 $(this).attr("src", "");
             });
         }
-        $(this).unbind("click");
-        let $flipped = $("." + flipClass);
-        if($flipped.length >= 2){
+        else{
+            flipped++;
+        }
+
+        let $flipped = $("." + defaults.flipClass);
+        if($flipped.length >= 2 && flipped >=2){
+
             if(checkPair()){
-                $flipped.addClass(foundClass);
+                $flipped.addClass(defaults.foundClass);
+                $flipped.unbind("click");
                 showPartHiddenImage();
             }
-            $flipped.removeClass(flipClass);
+            $flipped.removeClass(defaults.flipClass);
         }
-        $cards.not("." + flipClass + ", ." + foundClass).click(flip);
     }
-
 
     /***
      * Fonction qui va tester si les 2 cartes ouvertent sont une pair ou non
      * @returns {boolean} vrai si c'est une pair, faux sinon
      */
     function checkPair(){
+        flipped = 0;
         let found= false;
-        let cardFlipped= $('.'+ flipClass);
+        let cardFlipped= $('.'+ defaults.flipClass);
         let index1 = parseInt($(cardFlipped[0]).attr(attrCardId));
         let index2=parseInt($(cardFlipped[1]).attr(attrCardId));
-        if(cards[index1].id==cards[index2].id){
+        if(cards[index1].id === cards[index2].id){
             found= true;
             pairFound++;
         }
@@ -160,12 +228,17 @@
      * Fait tourner une carte et affiche la source de l'image juste avant
      */
     function flip(){
-        console.log("flip");
-        $cards.unbind("click");
-        if(!$(this).hasClass(flipClass)) {
-            $(this).find(".back").css("background-image", "url('" + cards[parseInt($(this).attr(attrCardId))].src + "')");
+        if(canFlip()) {
+            console.log("flip");
+            if (!$(this).hasClass(defaults.flipClass)) {
+                $(this).find(".back").css("background-image", "url('" + cards[parseInt($(this).attr(attrCardId))].src + "')");
+            }
+            $(this).toggleClass(defaults.flipClass);
         }
-        $(this).toggleClass(flipClass);
+    }
+
+    function canFlip(){
+        return $("." + defaults.flipClass).length < 2;
     }
 
     /***
@@ -173,10 +246,11 @@
      * @param row
      * @param col
      */
-    $.fn.generateHiding = function(row, col)
-    {
-        this.each(function()
+     function generateHiding(row, col){
+        console.log($(defaults.hidingWall));
+        $(defaults.hidingWall).each(function()
         {
+            $(this).html("");
             let table = document.createElement("table");
             let tbody = document.createElement("tbody");
 
@@ -192,17 +266,11 @@
 
             $(this).append(table);
         });
-    };
-
-    setScoreZone = function(zone){
-        scoreZone = zone;
-        generateScore();
-    };
-
-    setFoundPairZone = function(zone){
-        foundPairZone = zone;
-        generateFoundPair();
-    };
+        $(defaults.hiddenImage).each(function(){
+            $(this).html("");
+            $("<img>").appendTo(this).attr("src",getImageLevelPath())
+        })
+    }
 
     /***
      * update la vue pour afficher le nombre de paire trouvée
@@ -211,7 +279,7 @@
         let text = " paire";
         text += (pairFound > 1)? "s":"";
 
-        $(foundPairZone).each(function(){
+        $(defaults.pairFoundZone).each(function(){
             $(this).text(pairFound + text);
         });
     }
@@ -224,7 +292,7 @@
         let text = " point";
         text += (score > 1)? "s":"";
 
-        $(scoreZone).each(function(){
+        $(defaults.scoreZone).each(function(){
             $(this).text(score + text);
         });
     }
@@ -232,8 +300,12 @@
 })(jQuery);
 
 $(document).ready(function(){
-    setScoreZone($("#score"));
-    setFoundPairZone($("#pair_found"));
-    $(".hiding_wall").generateHiding(4, 2);
-    $("#card_board").magicCard(4,4);
+    init({
+        mode : $("#mode").val(),
+        level : 1
+    });
+
+    $("#new_game").click(function(){
+        change($("#mode").val(), 1);
+    });
 });
