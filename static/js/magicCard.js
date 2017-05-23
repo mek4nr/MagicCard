@@ -120,7 +120,7 @@
 
     function stopChronometer(){
         clearTimeout(timer); //arrête la fonction chrono()
-        $('#current_time').text(minu + ":" + secon +":"+ centi);
+        $('#current_time').text(minu + ":" + secon + ":" + centi);
     }
 
     function resetChronometer(){ //fonction qui remet les compteurs à 0
