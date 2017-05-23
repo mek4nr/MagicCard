@@ -13,6 +13,10 @@
 
     let flipped = 0;
 
+    let score = 0;
+
+    let imageFound = false;
+
     // Nombre d'essaie
     let tried = 0;
 
@@ -43,6 +47,8 @@
         hiddenImage : $(".hidden_image"),
         startButton : $("#start"),
         chronometer : $('#current_time'),
+        answerInput : $('#inp_anwser'),
+        answerButton : $('#answer'),
         flipClass : "flipped",
         foundClass : "find",
         mode : "pokemon",
@@ -54,10 +60,36 @@
         reset();
     };
 
+    /**
+     * Tourne les cartes les unes après les autres selon un délai fixé en constante
+     * @param cards {string}
+     * @param counter {number}
+     */
+    function revealCard(counter, addListener) {
+        setTimeout(function () {
+            flip($cards[counter], true);
+            counter++;
+            if(counter < (rowCards * colCards)){
+                revealCard(counter, addListener);
+            }
+            else{
+                if(addListener){
+                    $($cards[counter-1]).on("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function(){
+                        $cards.click(flipEvent).on("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", transitionListener);
+                    });
+                    chronometer();
+                }
+            }
+        }, 300)
+    }
+
     function reset(){
         resetChronometer();
         tried = 0;
         pairFound = 0;
+        score = 0;
+        imageFound = false;
+        $(defaults.answerButton).prop("disabled",true).unbind("click");
         generateHiding(4, 2);
         magicCard(4, 4);
         generateScore();
@@ -71,8 +103,10 @@
     };
 
     function start(){
-        chronometer();
-        $cards.click(flip).on("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", transitionListener);
+        revealCard(0, false);
+        setTimeout(function(){
+            revealCard(0, true);
+        }, 2000);
         $(this).unbind("click");
     }
 
@@ -84,12 +118,16 @@
         timer = setTimeout(chronometer,100) ;//la fonction est relancée tous les 10° de secondes
     }
 
-    function resetChronometer(){ //fonction qui remet les compteurs à 0
+    function stopChronometer(){
         clearTimeout(timer); //arrête la fonction chrono()
+        $('#current_time').text(minu + ":" + secon +":"+ centi);
+    }
+
+    function resetChronometer(){ //fonction qui remet les compteurs à 0
         centi=0;
         secon=0;
         minu=0;
-        $('#current_time').text(minu + ":" + secon +":"+ centi);
+        stopChronometer();
     }
 
     /***
@@ -168,17 +206,17 @@
         }
         else{
             flipped++;
-        }
 
-        let $flipped = $("." + defaults.flipClass);
-        if($flipped.length >= 2 && flipped >=2){
+            let $flipped = $("." + defaults.flipClass);
+            if($flipped.length >= 2 && flipped >=2){
 
-            if(checkPair()){
-                $flipped.addClass(defaults.foundClass);
-                $flipped.unbind("click");
-                showPartHiddenImage();
+                if(checkPair()){
+                    $flipped.addClass(defaults.foundClass);
+                    $flipped.unbind("click");
+                    showPartHiddenImage();
+                }
+                $flipped.removeClass(defaults.flipClass);
             }
-            $flipped.removeClass(defaults.flipClass);
         }
     }
 
@@ -195,11 +233,30 @@
         if(cards[index1].id === cards[index2].id){
             found= true;
             pairFound++;
+            score += foundPoints;
         }
-        tried++;
+        else{
+            score += triedPoints;
+            tried++;
+        }
+
+        if(pairFound == rowCards * colCards/2){
+            score -= minu*60 + secon;
+            stopChronometer();
+            $(defaults.answerButton).prop("disabled",false).click(testAnswer);
+        }
+
         generateScore();
         generateFoundPair();
         return found;
+    }
+
+    function testAnswer(e){
+        if($(defaults.answerInput).val() == answer[defaults.mode][defaults.level-1]){
+            imageFound = true;
+            score += 1000;
+            generateScore();
+        }
     }
 
     /***
@@ -227,18 +284,21 @@
     /***
      * Fait tourner une carte et affiche la source de l'image juste avant
      */
-    function flip(){
-        if(canFlip()) {
-            console.log("flip");
-            if (!$(this).hasClass(defaults.flipClass)) {
-                $(this).find(".back").css("background-image", "url('" + cards[parseInt($(this).attr(attrCardId))].src + "')");
+    function flipEvent(e){
+        flip(this);
+    }
+
+    function flip(card, forceFlip){
+        if(canFlip(card) || forceFlip === true) {
+            if (!$(card).hasClass(defaults.flipClass)) {
+                $(card).find(".back").css("background-image", "url('" + cards[parseInt($(card).attr(attrCardId))].src + "')");
             }
-            $(this).toggleClass(defaults.flipClass);
+            $(card).toggleClass(defaults.flipClass);
         }
     }
 
-    function canFlip(){
-        return $("." + defaults.flipClass).length < 2;
+    function canFlip(card){
+        return $("." + defaults.flipClass).length < 2 && !$(card).hasClass(defaults.flipClass);
     }
 
     /***
@@ -288,7 +348,6 @@
      * update la vue pour afficher le score en cours
      */
     function generateScore(){
-        let score = (foundPoints * pairFound + triedPoints * (tried-pairFound));
         let text = " point";
         text += (score > 1)? "s":"";
 
