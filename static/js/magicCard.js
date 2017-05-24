@@ -126,6 +126,7 @@
             revealCard(0, true);
         }, timeReveal*rowCards*colCards);
         $(this).unbind("click").click(pause).html("PAUSE");
+        sound_victory_wild_pokemon();
     }
 
     function pause(){
@@ -258,6 +259,11 @@
                 $flipped.removeClass(defaults.flipClass);
             }
         }
+    }
+
+
+    function sound_victory_wild_pokemon() {
+        document.getElementById('hoverSound').play();
     }
 
     /***
@@ -427,5 +433,6 @@ $(document).ready(function(){
         for(let index in highScores){
             stringScores += highScores[index][0] + " : " + highScores[index][1] + " points \n";
         }
+        console.log(stringScores)
     })
 });

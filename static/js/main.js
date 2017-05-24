@@ -3,6 +3,3 @@
 
 
 
-function menuHover() {
-    //document.getElementById('hoverSound').play();
-}

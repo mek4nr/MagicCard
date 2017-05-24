@@ -67,7 +67,9 @@ body{
     border-radius: 15%;
 
 }
-
+#card_board{
+    margin-left: 10%;
+}
 #card_board td{
     width: 100px;
     height: 110px;
