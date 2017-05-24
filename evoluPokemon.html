@@ -5,35 +5,35 @@
     <title>Magic Card</title>
     <link rel="stylesheet" href="static/css/imagebox.css" />
     <link rel="stylesheet" href="static/css/cards.css" />
-   <!-- <link rel="stylesheet" href="static/css/bootstrap.min.css" />-->
+    <link rel="stylesheet" href="static/css/bootstrap.min.css" />
     <link rel="stylesheet" href="static/css/bootstrap-theme.min.css" />
     <link rel="stylesheet" href="static/css/evolu_pokemon.css" />
-
 </head>
 <body>
 
 <audio src="static/sons/chris.wav" style="" id="hoverSound"></audio>
 
 <div id="container_table_img">
+
+    <table id="card_board"  >
+
+    </table>
     <div class="container-fluid" id="container_btn_answer">
         <div id="div_answer">
-            <select class="btn">
-                <option>POKEMON</option>
-                <option>AVION DE CHASSE</option>
+            <button class="btn" id="start">START</button>
+            <button class="btn" id="new_game">NEW GAME</button>
+            <select id="mode" class="form-control">
+                <option>pokemon</option>
+                <option>eevee</option>
             </select>
-            <button class="btn" id="menu"><a href="index2.html">WELCOME</a></button>
-            <button class="btn" id="chrono">START GAME</button>
-
 
         </div>
-        <div id="div_reset">
-            <button class="btn" id="new_game">NEW GAME</button>
-            <button class="btn" id="quit">EXIT GAME</button>
-            <div id="area_answer">
-                <button class="btn" id="answer">ANSWER</button>
-                <input type="text" name="inp_answer"/>
-            </div>
+        <div id="div_reset" class="form-inline">
 
+
+            <input type="text" name="inp_answer" id="inp_anwser" width="50px"/>
+            <button class="btn" id="answer">ANSWER</button>
+            <button class="btn" id="high_score">SCORES</button>
 
         </div>
         <div id="img_guess">
@@ -43,9 +43,6 @@
 
         </div>
     </div>
-    <table id="card_board"  >
-
-    </table>
     <div class="container_picture">
         <div class="hidden_image">
             <img src="static/img/mode/pokemon/levels/img1.png" />
@@ -54,12 +51,10 @@
         </div>
     </div>
 </div>
+
 <script src="static/js/jquery-3.2.1.min.js"></script>
 <script src="static/js/bootstrap.min.js"></script>
 <script src="static/js/magicCard.js"></script>
 <script src="static/js/main.js"></script>
-<script type="text/javascript">
-
-</script>
 </body>
 </html>
