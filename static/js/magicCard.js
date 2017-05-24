@@ -4,6 +4,7 @@
     // Point lorsque trouvé ou essayé
     const foundPoints = 100;
     const triedPoints = -10;
+    const timeReveal = 300;
 
     // La liste des cartes présentent
     let cards = [];
@@ -33,10 +34,13 @@
     let secon=0 ;
     let minu=0;
     let timer = null;
+    let animationTimeout = null;
+    let secondAnimationTiemout = null;
+
 
     let answer = {
         'pokemon' : ['absol'],
-        'eevee' : ['']
+        'eevee' : ['mew']
     };
 
     let defaults = {
@@ -66,7 +70,7 @@
      * @param counter {number}
      */
     function revealCard(counter, addListener) {
-        setTimeout(function () {
+        animationTimeout = setTimeout(function () {
             flip($cards[counter], true);
             counter++;
             if(counter < (rowCards * colCards)){
@@ -80,11 +84,13 @@
                     chronometer();
                 }
             }
-        }, 300)
+        }, timeReveal)
     }
 
     function reset(){
         resetChronometer();
+        clearTimeout(secondAnimationTiemout);
+        clearTimeout(animationTimeout);
         tried = 0;
         pairFound = 0;
         score = 0;
@@ -102,12 +108,33 @@
         reset();
     };
 
+    saveScore = function(name){
+        let highScores = getHighScores();
+        highScores.push([$("#pseudo").val(), score]);
+        setHighScores(highScores);
+    };
+
+    highscores = function(){
+        return getHighScores();
+    }
+
     function start(){
+
+        console.log(getHighScores());
         revealCard(0, false);
-        setTimeout(function(){
+        secondAnimationTiemout = setTimeout(function(){
             revealCard(0, true);
-        }, 2000);
+        }, timeReveal*rowCards*colCards);
         $(this).unbind("click");
+    }
+
+    function getHighScores(){
+        let highScores = JSON.parse(localStorage.getItem('HighScores'));
+        return (highScores !== null) ? highScores : [];
+    }
+
+    function setHighScores(highScores){
+        localStorage["HighScores"] = JSON.stringify(highScores);
     }
 
     function chronometer(){
@@ -256,6 +283,7 @@
             imageFound = true;
             score += 1000;
             generateScore();
+            $('#modal-victory').modal('show');
         }
     }
 
@@ -364,7 +392,28 @@ $(document).ready(function(){
         level : 1
     });
 
+    let $input = $("#pseudo");
     $("#new_game").click(function(){
         change($("#mode").val(), 1);
     });
+
+    $("#btn-save").click(function () {
+        $input.parent().removeClass("has-error");
+        if($input.val() === ""){
+            $input.parent().addClass("has-error");
+        }
+        else{
+            saveScore($input.val());
+            $("#modal-score").modal('hide');
+        }
+    });
+
+    $("#highscores").click(function () {
+        let highScores = highscores();
+        let stringScores = "";
+        for(let index in highScores){
+            stringScores += highScores[index][0] + " : " + highScores[index][1] + " points \n";
+        }
+        alert(stringScores);
+    })
 });

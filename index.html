@@ -23,6 +23,7 @@
                 <option>pokemon</option>
                 <option>eevee</option>
             </select>
+            <button class="btn" id="highscores">HIGHSCORES</button>
         </div>
         <div id="img_guess">
             <div>PAIRES TROUVEES:<span id="pair_found">  </span></div>
@@ -42,6 +43,29 @@
                 <img src="static/img/mode/pokemon/levels/img1.png" />
             </div>
             <div class="hiding_wall">
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-victory" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">You win</h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                    Your score is <span id="modal-score"></span> points. You can save your score.
+                    </div>
+                    <div class="form-group">
+                        <label for="pseudo">Your name : </label><input type="text" class="form-control" name="pseudo" id="pseudo" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn" data-dismiss="modal">Close</button>
+                    <button type="button" id="btn-save" class="btn">Save score</button>
+                </div>
             </div>
         </div>
     </div>
