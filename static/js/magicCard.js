@@ -64,6 +64,21 @@
         reset();
     };
 
+
+    let game_type=$('#mode');
+
+    game_type.on('change', function () {
+        if(game_type.val()=='eevee'){
+            window.location.href = 'evoluPokemon.html';
+        }
+        if(game_type.val()=='pokemon'){
+            window.location.href = 'index.html';
+        }
+
+    });
+
+
+
     /**
      * Tourne les cartes les unes après les autres selon un délai fixé en constante
      * @param cards {string}
