@@ -116,7 +116,7 @@
 
     highscores = function(){
         return getHighScores();
-    }
+    };
 
     function start(){
 
@@ -414,6 +414,5 @@ $(document).ready(function(){
         for(let index in highScores){
             stringScores += highScores[index][0] + " : " + highScores[index][1] + " points \n";
         }
-        alert(stringScores);
     })
 });
