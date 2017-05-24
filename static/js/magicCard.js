@@ -36,7 +36,7 @@
     let timer = null;
     let animationTimeout = null;
     let secondAnimationTiemout = null;
-
+    let bPause = false;
 
     let answer = {
         'pokemon' : ['absol'],
@@ -125,7 +125,20 @@
         secondAnimationTiemout = setTimeout(function(){
             revealCard(0, true);
         }, timeReveal*rowCards*colCards);
-        $(this).unbind("click");
+        $(this).unbind("click").click(pause).html("PAUSE");
+    }
+
+    function pause(){
+        $(this).unbind("click").click(unpause).html("RESUME");
+        bPause = true;
+        stopChronometer();
+
+    }
+
+    function unpause(){
+        $(this).unbind("click").click(pause).html("PAUSE");
+        bPause = false;
+        chronometer();
     }
 
     function getHighScores(){
@@ -326,7 +339,7 @@
     }
 
     function canFlip(card){
-        return $("." + defaults.flipClass).length < 2 && !$(card).hasClass(defaults.flipClass);
+        return $("." + defaults.flipClass).length < 2 && !$(card).hasClass(defaults.flipClass) && !bPause;
     }
 
     /***
