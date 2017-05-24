@@ -18,7 +18,7 @@ body{
 
 }
 #container_btn_answer{
-    width: 29%;
+    width: 28%;
     border: 10px inset #31b0d5;
     box-shadow: 10px 10px 0px  purple;
     padding-top: 2%;
@@ -44,7 +44,7 @@ body{
 
 }
 .btn{
-    border: 1px groove orange;
+    border: 3px groove yellow;
 }
 
 .btn:hover, a:hover{
@@ -63,8 +63,8 @@ body{
     color:  white;
     background-color:#31b0d5;
     padding: 2%;
-    margin: 3%;
-    border-radius: 20%;
+   margin: 3%;
+    border-radius: 15%;
 
 }
 
@@ -79,3 +79,11 @@ body{
     color: yellow;
     text-align: center;
 }
+#div_reset{
+    border: 2px solid yellow;
+    text-align: center;
+    margin-top: 10px;
+    border-bottom-right-radius: 20%;
+    background-color: #31b0d5;
+}
+

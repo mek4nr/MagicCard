@@ -5,7 +5,7 @@
     <title>Magic Card</title>
     <link rel="stylesheet" href="static/css/imagebox.css" />
     <link rel="stylesheet" href="static/css/cards.css" />
-    <!-- <link rel="stylesheet" href="static/css/bootstrap.min.css" />-->
+    <link rel="stylesheet" href="static/css/bootstrap.min.css" />
     <link rel="stylesheet" href="static/css/bootstrap-theme.min.css" />
     <link rel="stylesheet" href="static/css/avions.css" />
 </head>
@@ -24,16 +24,18 @@
                 <option>POKEMON</option>
                 <option>AVION DE CHASSE</option>
             </select>
-            <button class="btn" id="menu"><a href="index2.html">WELCOME</a></button>
-            <button class="btn" id="chrono">START GAME</button>
 
+            <button class="btn" id="chrono">START GAME</button>
+            <button class="btn" id="new_game">NEW GAME</button>
 
         </div>
         <div id="div_reset">
 
             <div id="area_answer">
-                <button class="btn" id="answer">ANSWER</button>
+
                 <input type="text" name="inp_answer"/>
+                <button class="btn" id="answer">ANSWER</button>
+                <button class="btn" id="high_score">SCORES</button>
             </div>
 
 
@@ -42,10 +44,7 @@
             <div>PAIRES:<span id="pair_found">  </span></div>
             <div>TEMPS MIS:<span id="current_time">   </span></div>
             <div>SCORE:<span id="score">   </span></div>
-            <div id="div_btns">
-                <button class="btn" id="new_game">NEW GAME</button>
-                <button class="btn" id="quit">EXIT GAME</button>
-            </div>
+
 
 
         </div>
