@@ -71,6 +71,9 @@
         if(game_type.val()=='eevee'){
             window.location.href = 'evoluPokemon.html';
         }
+        else if(game_type.val()=='avions'){
+            window.location.href = 'avions.html';
+        }
         else {
             window.location.href = 'index.html';
         }

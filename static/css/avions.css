@@ -80,11 +80,15 @@ body{
     text-align: center;
 }
 #div_answer{
-    margin-left: 10%;
+   /* margin-left: 10%;*/
+    text-align: center;
 }
 #div_btns{
     margin: auto;
     text-align: center;
+}
+#card_board{
+    margin-left: 10%;
 }
 
 #div_reset{
