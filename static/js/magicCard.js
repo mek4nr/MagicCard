@@ -40,8 +40,15 @@
 
     let answer = {
         'pokemon' : ['absol'],
-        'eevee' : ['mew']
+        'eevee' : ['mew'],
+        'avion' : ['rafale']
     };
+
+    let cardsBack = {
+        'pokemon' : ["url('static/img/dos2.png')"],
+        'eevee' : ["url('static/img/dos2.png')"],
+        'avion' : ["url('static/img/coeur.png')"]
+    }
 
     let defaults = {
         scoreZone : $("#score"),
@@ -99,6 +106,7 @@
                     $($cards[counter-1]).on("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function(){
                         $cards.click(flipEvent).on("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", transitionListener);
                     });
+                    $(defaults.startButton).click(pause).html("PAUSE");
                     chronometer();
                 }
             }
@@ -129,6 +137,7 @@
     saveScore = function(name){
         let highScores = getHighScores();
         highScores.push([$("#pseudo").val(), score]);
+        console.log(highScores);
         setHighScores(highScores);
     };
 
@@ -137,13 +146,12 @@
     };
 
     function start(){
-
-        console.log(getHighScores());
+        $(defaults.startButton).unbind("click")
         revealCard(0, false);
         secondAnimationTiemout = setTimeout(function(){
             revealCard(0, true);
         }, timeReveal*rowCards*colCards);
-        $(this).unbind("click").click(pause).html("PAUSE");
+
         sound_victory_wild_pokemon();
     }
 
@@ -341,7 +349,7 @@
         let container = document.createElement("div");
         $(container).addClass("card_container");
         let card = $("<div>").appendTo(container).addClass("card").attr(attrCardId, index);
-        $("<div>").appendTo(card).addClass("front").css('background-image', "url('static/img/dos2.png')");
+        $("<div>").appendTo(card).addClass("front").css('background-image', cardsBack[defaults.mode]);
         $("<div>").appendTo(card).addClass("back");
         return container;
     }
@@ -441,7 +449,7 @@ $(document).ready(function(){
         }
         else{
             saveScore($input.val());
-            $("#modal-score").modal('hide');
+            $("#modal-victory").modal('hide');
         }
     });
 
@@ -449,8 +457,10 @@ $(document).ready(function(){
         let highScores = highscores();
         let stringScores = "";
         for(let index in highScores){
-            stringScores += highScores[index][0] + " : " + highScores[index][1] + " points \n";
+
+            stringScores += highScores[index][0] + " : " + highScores[index][1] + " points <br>";
         }
-        console.log(stringScores)
+        $("#modal-highscore .modal-body").html(stringScores);
+        $("#modal-highscore").modal("show");
     })
 });

@@ -54,7 +54,6 @@ body{
 .btn:active, a:active{
     background-color: green;
     box-shadow: 0 5px white;
-    transform: translateY(10px);
 }
 
 #img_guess > div{
